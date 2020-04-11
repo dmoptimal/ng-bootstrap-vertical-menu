@@ -736,6 +736,7 @@ export class ShellComponent implements OnInit {
           sortable: true,
           id:'owned',
           connectedTo:['folder1'],
+          subfolders: true,
           items: [
             {
               title: 'Production',
@@ -745,6 +746,7 @@ export class ShellComponent implements OnInit {
               sortable: true,
               id:'folder1',
               connectedTo:['owned'],
+              editable: true,
               items: [
                 {title: 'CM1'},
                 {title: 'CM2'},

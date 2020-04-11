@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFlagIconCssModule } from 'ngx-flag-icon-css';
 import { PrettyJsonModule } from 'angular2-prettyjson';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms' 
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [MenuComponent, ShellComponent],
@@ -18,7 +20,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BrowserAnimationsModule,
     NgxFlagIconCssModule,
     PrettyJsonModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule,
+    ColorPickerModule
   ]
 })
 export class ShellModule { }

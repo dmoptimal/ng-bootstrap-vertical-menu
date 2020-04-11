@@ -1,0 +1,65 @@
+<div *ngIf="sortable" cdkDropList
+    (cdkDropListDropped)="drop($event)" id="{{id}}"
+    [cdkDropListData]="items"
+    [cdkDropListConnectedTo]="dls">
+    <div class="list-group list-group-root list-group-flush"
+        *ngFor="let item of items"
+        cdkDrag>
+        <button class="list-group-item list-group-item-action"
+            (click)="select(item)"
+            [class]="item.class">
+            <fa-icon *ngIf="item.icon"
+                [icon]="item.icon"
+                [fixedWidth]="true"
+                [class]="item.iconClass"
+                [style.color]="item.iconColor">
+            </fa-icon>
+            <flag-icon *ngIf="item.flag"
+                [country]="item.flag"
+                squared></flag-icon>
+            {{item.title}}
+            <fa-icon *ngIf="item.items"
+                [icon]="faChevronRight"
+                [fixedWidth]="true"
+                [class.rotated]="!item.isCollapsed"
+                [class.notRotated]="item.isCollapsed">
+            </fa-icon>
+        </button>
+        <app-menu [sortable]="item.sortable"
+            [connectedTo]="item.connectedTo"
+            [id]="item.id"
+            [items]="item.items"
+            *ngIf="item.items"
+            [@smoothCollapse]="item.isCollapsed?'initial':'final'"></app-menu>
+    </div>
+</div>
+
+<div *ngIf="!sortable">
+    <div class="list-group list-group-root list-group-flush"
+        *ngFor="let item of items">
+        <button class="list-group-item list-group-item-action"
+            (click)="select(item)"
+            [class]="item.class">
+            <fa-icon *ngIf="item.icon"
+                [icon]="item.icon"
+                [fixedWidth]="true"
+                [class]="item.iconClass"
+                [style.color]="item.iconColor">
+            </fa-icon>
+            <flag-icon *ngIf="item.flag"
+                [country]="item.flag"
+                squared></flag-icon>
+            {{item.title}}
+            <fa-icon *ngIf="item.items"
+                [icon]="faChevronRight"
+                [fixedWidth]="true"
+                [class.rotated]="!item.isCollapsed"
+                [class.notRotated]="item.isCollapsed">
+            </fa-icon>
+        </button>
+        <app-menu [sortable]="item.sortable"
+            [items]="item.items"
+            *ngIf="item.items"
+            [@smoothCollapse]="item.isCollapsed?'initial':'final'"></app-menu>
+    </div>
+</div>

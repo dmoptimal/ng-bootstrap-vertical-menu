@@ -1,0 +1,13 @@
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <app-menu [items]="items"></app-menu>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+        <pre [innerHtml]="items | prettyjson:3"></pre>
+    </div>
+
+</div>  

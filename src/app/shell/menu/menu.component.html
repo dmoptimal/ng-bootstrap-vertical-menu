@@ -1,24 +1,38 @@
-<div *ngIf="sortable" cdkDropList
-    (cdkDropListDropped)="drop($event)" 
+<div *ngIf="sortable"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
     id="{{id}}"
     [cdkDropListData]="items"
     [cdkDropListConnectedTo]="connectedTo">
+
+    <div *ngIf="items.length === 0" class="list-group list-group-root list-group-flush text-center justify-content-center" style="height: 50px!important; background-color:gray;">
+        <div>
+            Drop Items Here
+        </div>
+    </div>
+
 
     <div class="list-group list-group-root list-group-flush"
         *ngFor="let item of items"
         cdkDropListGroup
         cdkDrag
-        [cdkDragData]="item">
+        [cdkDragData]="item"
+        [cdkDragDisabled]="item.editing">
+
+        <button class="list-group-item text-center" *cdkDragPlaceholder>
+            <fa-icon [icon]="faChevronDown" style="color: black;"></fa-icon>
+        </button>
 
         <button class="list-group-item list-group-item-action"
-            (click)="select(item)"
+            (click)="!item.editing && select(item)"
             [class]="item.class"
-            (mouseenter)="hovering = true;" 
-            (mouseleave)="hovering = false;">
-            
-            <div *ngIf="item.editing" class="input-group input-group-sm">
+            (mouseenter)="item.hovering = true;"
+            (mouseleave)="item.hovering = false;">
+
+            <div *ngIf="item.editing"
+                class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary" 
+                    <button class="btn btn-outline-secondary"
                         type="button"
                         [cpAlphaChannel]="'always'"
                         [cpOutputFormat]="'rgba'"
@@ -26,13 +40,23 @@
                         [cpAddColorButton]="true"
                         [cpUseRootViewContainer]="true"
                         [(colorPicker)]="item.iconColor">
-                        <fa-icon [icon]="faTint" [fixedWidth]="true" [style.color]="item.iconColor"></fa-icon>
+                        <fa-icon [icon]="faTint"
+                            [fixedWidth]="true"
+                            [style.color]="item.iconColor"></fa-icon>
                     </button>
                 </div>
-                <input type="text" class="form-control" placeholder="Edit name" [(ngModel)]="item.title" (click)="$event.stopPropagation()" required>
+                <input type="text"
+                    class="form-control"
+                    placeholder="Edit name"
+                    [(ngModel)]="item.title"
+                    (click)="$event.stopPropagation()"
+                    required>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-success" type="button" (click)="item.editing = false;$event.stopPropagation()">
-                        <fa-icon [icon]="faCheck" [fixedWidth]="true"></fa-icon>
+                    <button class="btn btn-outline-success"
+                        type="button"
+                        (click)="item.editing = false;$event.stopPropagation()">
+                        <fa-icon [icon]="faCheck"
+                            [fixedWidth]="true"></fa-icon>
                     </button>
                 </div>
             </div>
@@ -51,32 +75,33 @@
 
                 {{item.title}}
 
-                <fa-icon *ngIf="item.items"
+                <fa-icon *ngIf="item.items || item.sortable"
                     [icon]="faChevronRight"
                     [fixedWidth]="true"
                     [class.rotated]="!item.isCollapsed"
                     [class.notRotated]="item.isCollapsed">
                 </fa-icon>
 
-                <a *ngIf="item.subfolders && hovering" class="right-icon float-right" (click)="addSubfolder();$event.stopPropagation()">
-                    <fa-icon [icon]="faPlus"></fa-icon> 
+                <a *ngIf="item.subfolders && item.hovering"
+                    class="right-icon float-right"
+                    (click)="addSubfolder();$event.stopPropagation()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
                 </a>
-    
-                <a *ngIf="item.editable && hovering" class="right-icon float-right" (click)="editItem(item);$event.stopPropagation()">
-                    <fa-icon [icon]="faPencilAlt"></fa-icon> 
+
+                <a *ngIf="item.editable && item.hovering"
+                    class="right-icon float-right"
+                    (click)="editItem(item);$event.stopPropagation()">
+                    <fa-icon [icon]="faPencilAlt"></fa-icon>
                 </a>
             </ng-container>
-            
-
-            
 
         </button>
-        
+
         <app-menu [sortable]="item.sortable"
             [connectedTo]="item.connectedTo"
             [id]="item.id"
             [items]="item.items"
-            *ngIf="item.items"
+            *ngIf="item.items || item.sortable"
             [@smoothCollapse]="item.isCollapsed?'initial':'final'">
         </app-menu>
 
@@ -92,7 +117,7 @@
         <button class="list-group-item list-group-item-action"
             (click)="select(item)"
             [class]="item.class"
-            (mouseenter)="hovering = true;" 
+            (mouseenter)="hovering = true;"
             (mouseleave)="hovering = false;">
             <fa-icon *ngIf="item.icon"
                 [icon]="item.icon"
@@ -110,12 +135,16 @@
                 [class.rotated]="!item.isCollapsed"
                 [class.notRotated]="item.isCollapsed">
             </fa-icon>
-            <a *ngIf="item.subfolders && hovering" class="right-icon float-right" (click)="addSubfolder();$event.stopPropagation()">
-                <fa-icon [icon]="faPlus"></fa-icon> 
+            <a *ngIf="item.subfolders && hovering"
+                class="right-icon float-right"
+                (click)="addSubfolder();$event.stopPropagation()">
+                <fa-icon [icon]="faPlus"></fa-icon>
             </a>
 
-            <a *ngIf="item.editable && hovering" class="right-icon float-right" (click)="editItem(item);$event.stopPropagation()">
-                <fa-icon [icon]="faPencilAlt"></fa-icon> 
+            <a *ngIf="item.editable && hovering"
+                class="right-icon float-right"
+                (click)="editItem(item);$event.stopPropagation()">
+                <fa-icon [icon]="faPencilAlt"></fa-icon>
             </a>
         </button>
 
@@ -123,7 +152,7 @@
             [connectedTo]="item.connectedTo"
             [id]="item.id"
             [items]="item.items"
-            *ngIf="item.items"
+            *ngIf="item.items || item.sortable"
             [@smoothCollapse]="item.isCollapsed?'initial':'final'">
         </app-menu>
 

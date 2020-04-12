@@ -735,7 +735,7 @@ export class ShellComponent implements OnInit {
           isCollapsed: true,
           sortable: true,
           id:'owned',
-          connectedTo:['folder1'],
+          connectedTo:['folder1', 'folder2'],
           subfolders: true,
           items: [
             {
@@ -745,7 +745,7 @@ export class ShellComponent implements OnInit {
               isCollapsed: true,
               sortable: true,
               id:'folder1',
-              connectedTo:['owned'],
+              connectedTo:['owned', 'folder2'],
               editable: true,
               items: [
                 {title: 'CM1'},

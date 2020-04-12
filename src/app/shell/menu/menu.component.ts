@@ -85,13 +85,16 @@ export class MenuComponent implements OnInit {
   addSubfolder() {
     console.log(this.items[0].items);
     this.items[0].items.push({
-      title: 'Production',
+      title: '',
       icon: faFolder,
       iconColor: '#D14747',
       isCollapsed: true,
       sortable: true,
-      id: 'folder1',
-      connectedTo: ['owned']
+      editable: true, 
+      editing: true,
+      id: 'folder2',
+      connectedTo: ['owned', 'folder1'],
+      items: []
     })
   }
 

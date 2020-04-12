@@ -6,6 +6,10 @@
 //     transition: all 0.1s;
 // }
 
+.list-group.cdk-drop-list-dragging .list-group-item:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
 .right-icon{
     -webkit-transition: all 0.1s;
         -moz-transition: all 0.1s;
@@ -27,7 +31,7 @@
 }
 
 .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .cdk-drag-preview {
@@ -45,9 +49,7 @@
     border: none;
   }
 
-.list-group.cdk-drop-list-dragging .list-group-item:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
+
 
 
 .btn-xs {
@@ -56,4 +58,9 @@
     line-height: .5;
     border-radius: .2rem;
     color: white;
+  }
+
+  .item-placeholder{
+      height: 100px;
+      background-color: grey !important;
   }

@@ -45,9 +45,9 @@
     opacity: 0;
 }
 
-.list-group-item:last-child {
-    border: none;
-  }
+// .list-group-item:last-child {
+//     border: none;
+//   }
 
 
 
@@ -64,3 +64,10 @@
       height: 100px;
       background-color: grey !important;
   }
+
+  .emptyList{
+      min-height:120px;
+      background-color: rgb(214, 214, 214) !important;
+  }
+
+  

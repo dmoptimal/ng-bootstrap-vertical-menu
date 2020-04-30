@@ -1,26 +1,94 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faChevronRight, faChevronDown, faPlus, faFolder, faPencilAlt, faTint, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, state, style, animate, transition, stagger, query } from '@angular/animations';
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
+
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   animations: [
-    trigger('smoothCollapse', [
-      state('initial', style({
-        height: '0',
-        overflow: 'hidden',
-        opacity: '1'
-      })),
-      state('final', style({
-        overflow: 'hidden',
-        opacity: '1'
-      })),
-      transition('initial=>final', animate('150ms')),
-      transition('final=>initial', animate('150ms'))
-    ]),
+    trigger(
+      'inOutAnimation',
+      [
+        transition(
+          ':enter',
+          [
+            style({ height: 0, opacity: 0 }),
+            animate('0.2s ease',
+              style({ height: '*', opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave',
+
+          [
+            style({ height: '*', opacity: 1 }),
+            animate('0.2s ease',
+              style({ height: 0, opacity: 0 })),
+
+          ]
+        )
+      ]
+    ),
+    trigger(
+      'inOutNoHeightAnimation',
+      [
+        transition(
+          ':enter',
+          [
+            style({ opacity: 0 }),
+            animate('0.2s 300ms ease',
+              style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave',
+
+          [
+            style({opacity: 1 }),
+            animate('0.2s 300ms ease',
+              style({  opacity: 0 })),
+
+          ]
+        )
+      ]
+    ),
+    // trigger(
+    //   'inOutNoHeightAnimation',
+    //   [
+    //     ,
+    //     transition('* => *',[
+    //       query(':leave',
+
+    //         [
+    //           style({ opacity: 1 }),
+    //           stagger(100, [animate('0.1s ease',
+    //             style({ opacity: 0 }))])
+             
+
+    //         ])
+    //     ]
+    //     )
+    //   ]
+    // )
+    // trigger('inOutNoHeightAnimation', [
+    //   transition('* => *', [ // each time the binding value changes
+    //     query(':leave', [
+    //       stagger(100, [
+    //         animate('0.5s', style({ opacity: 0 }))
+    //       ])
+    //     ], { optional: true }),
+    //     query(':enter', [
+    //       style({ opacity: 0 }),
+    //       stagger(100, [
+    //         animate('0.5s', style({ opacity: 1 }))
+    //       ])
+    //     ], { optional: true })
+    //   ])
+    // ])
   ]
 })
 export class MenuComponent implements OnInit {
@@ -47,6 +115,9 @@ export class MenuComponent implements OnInit {
 
   @Input()
   subfolders: any;
+
+  @Input()
+  collapsed: any;
 
   // public dls: CdkDropList[] = [];
 
@@ -90,7 +161,7 @@ export class MenuComponent implements OnInit {
       iconColor: '#D14747',
       isCollapsed: true,
       sortable: true,
-      editable: true, 
+      editable: true,
       editing: true,
       id: 'folder2',
       connectedTo: ['owned', 'folder1'],
@@ -98,7 +169,7 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  editItem(item){
+  editItem(item) {
     item.editing = true;
   }
 

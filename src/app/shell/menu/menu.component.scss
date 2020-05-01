@@ -1,10 +1,11 @@
-// .list-group {
-//     -webkit-transition: all 0.1s;
-//     -moz-transition: all 0.1s;
-//     -ms-transition: all 0.1s;
-//     -o-transition: all 0.1s;
-//     transition: all 0.1s;
-// }
+.list-group {
+    // height:100px;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -ms-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+}
 
 .list-group.cdk-drop-list-dragging .list-group-item:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);

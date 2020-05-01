@@ -28,7 +28,6 @@
             (mouseleave)="item.hovering = false;">
 
             <div *ngIf="item.editing"
-            [@inOutAnimation]
                 class="input-group input-group-sm">
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-secondary"
@@ -82,14 +81,12 @@
                 </fa-icon>
 
                 <a *ngIf="item.subfolders && item.hovering"
-                [@inOutAnimation]
                     class="right-icon float-right"
                     (click)="addSubfolder();$event.stopPropagation()">
                     <fa-icon [icon]="faPlus"></fa-icon>
                 </a>
 
                 <a *ngIf="item.editable && item.hovering"
-                [@inOutAnimation]
                     class="right-icon float-right"
                     (click)="editItem(item);$event.stopPropagation()">
                     <fa-icon [icon]="faPencilAlt"></fa-icon>
@@ -104,6 +101,7 @@
             [items]="item.items"
             [collapsed]="item.isCollapsed"
             *ngIf="item.items || item.sortable"
+            (updateConnectedChildLists)="onUpdateConnectedList($event)"
             >
         </app-menu>
 

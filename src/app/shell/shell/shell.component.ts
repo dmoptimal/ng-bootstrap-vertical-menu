@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faHome, faTachometerAlt, faCog, faLanguage, faPlus, faEyeSlash, faUser, faUsers, faFolder } from '@fortawesome/free-solid-svg-icons';
 // import { PrettyJsonComponent } from 'angular2-prettyjson';
+import {MenuItem} from '../../menu-item';
 
 @Component({
   selector: 'app-shell',
@@ -13,9 +14,6 @@ import { faHome, faTachometerAlt, faCog, faLanguage, faPlus, faEyeSlash, faUser,
     :host /deep/ .key { color: red; }
   `],
   styleUrls: ['./shell.component.scss'],
-  // entryComponents: [
-  //   PrettyJsonComponent
-  // ]
 })
 export class ShellComponent implements OnInit {
 
@@ -29,697 +27,23 @@ export class ShellComponent implements OnInit {
   faUsers = faUsers
   faFolder = faFolder
 
-  // Large List 
-  // items = [
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title: "Item 1",
-  //     isCollapsed: true,
-  //     items: [
-  //       {
-  //         title: "Item 1.1",
-  //         isCollapsed: true,
-  //       }, {
-  //         title: "Item 1.2",
-  //         isCollapsed: true,
-  //         items: [
-  //           {
-  //             title: "Item 1.2.1",
-  //           },
-  //           {
-  //             title: "Item 1.2.2"
-  //           },
-  //           {
-  //             title: "Item 1.2.3"
-  //           },
-  //           {
-  //             title: "Item 1.2.4",
-  //             isCollapsed: true,
-  //             items: [
-  //               {
-  //                 title: "Item 1.2.4.1"
-  //               },
-  //               {
-  //                 title: "Item 1.2.4.2"
-  //               }
-  //             ]
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ]
+  // title : string
+  // icon: any
+  // iconClass: string
+  // iconColor: string (html color),
+  // flag: string (enum country codes)
+  // id: string
+  // subfolders: boolean
+  // sortable: boolean
+  // editable: boolean
+  // isCollapsed: boolean
+  // items: array (menu items)
+  // 
 
-  items = [
+  items:Array<MenuItem> = [
     {
       title: 'Home',
+      id:'home',
       icon: faHome,
       isCollapsed: true,
     },
@@ -727,6 +51,7 @@ export class ShellComponent implements OnInit {
       title: 'Dashboards',
       icon: faTachometerAlt,
       isCollapsed: true,
+      id: 'dash',
       items: [
         {
           title: 'Owned By You',
@@ -735,7 +60,7 @@ export class ShellComponent implements OnInit {
           isCollapsed: true,
           sortable: true,
           id:'owned',
-          connectedTo:['folder1', 'folder2'],
+          connectedTo:['owned', 'folder1', 'folder2'],
           subfolders: true,
           items: [
             {
@@ -745,33 +70,36 @@ export class ShellComponent implements OnInit {
               isCollapsed: true,
               sortable: true,
               id:'folder1',
-              connectedTo:['owned', 'folder2'],
+              connectedTo:['owned', 'folder1', 'folder2'],
               editable: true,
               items: [
-                {title: 'CM1'},
-                {title: 'CM2'},
-                {title: 'CM3'},
-                {title: 'CM4'},
+                {title: 'CM1', id: 'CM1'},
+                {title: 'CM2', id: 'CM2'},
+                {title: 'CM3', id: 'CM3'},
+                {title: 'CM4', id: 'CM3'},
               ]
             },
-            { title: 'Speed' },
-            { title: 'Time' },
-            { title: 'Process' },
-            { title: 'Cold Mills' },
+            { title: 'Speed', id:'Speed' },
+            { title: 'Time',  id:'Time'  },
+            { title: 'Process',  id:'Process'  },
+            { title: 'Cold Mills',  id:'Mills'  },
           ]
         },
         {
           title: 'Shared With You',
+          id:'shared',
           icon: faUser,
           iconClass: 'text-success'
         },
         {
           title: 'Public',
+          id:'pub',
           icon: faUsers,
           iconClass: 'text-primary'
         },
         {
           title: 'New Dashboard',
+          id:'newDash',
           icon: faPlus,
           class: "text-success"
         }
@@ -781,23 +109,28 @@ export class ShellComponent implements OnInit {
       title: 'Language',
       icon: faLanguage,
       isCollapsed: true,
+      id:'lang',
       items: [
         {
           title: 'English',
-          flag: 'gb'
+          flag: 'gb',
+          id:'eng'
         },
         {
           title: 'Swedish',
-          flag: 'se'
+          flag: 'se',
+          id:'swe'
         },
         {
           title: 'Chinese',
-          flag: 'cn'
+          flag: 'cn',
+          id: 'chn'
         }
       ]
     },
     {
       title: 'Settings',
+      id:'sett',
       icon: faCog,
       isCollapsed: true,
     },

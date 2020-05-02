@@ -60,13 +60,14 @@ export class ShellComponent implements OnInit {
           isCollapsed: true,
           sortable: true,
           id:'owned',
+          parentNode: true,
           connectedTo:['owned', 'folder1', 'folder2'],
           subfolders: true,
           items: [
             {
               title: 'Production',
               icon: faFolder,
-              iconColor: '#D14747',
+              iconColor: 'rgba(208,67,67,1)',
               isCollapsed: true,
               sortable: true,
               id:'folder1',

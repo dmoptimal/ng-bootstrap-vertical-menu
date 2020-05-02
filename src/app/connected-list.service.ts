@@ -6,13 +6,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ConnectedListService {
 
-  private message = new BehaviorSubject([]);
-  sharedMessage = this.message.asObservable();
+  private connectedList = new BehaviorSubject([]);
+  sharedList = this.connectedList.asObservable();
 
   constructor() { }
 
-  nextMessage(message: Array<string>) {
-    this.message.next(message)
+  nextListState(newList: Array<string>) {
+    this.connectedList.next(newList)
+    // console.log(this.connectedList);
   }
   
 }

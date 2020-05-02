@@ -14,5 +14,6 @@ export interface MenuItem {
     items?: Array<this>,
     callback?: Function,
     route?: string
-    editing?: boolean
+    editing?: boolean,
+    parentNode?: boolean
 }

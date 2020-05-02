@@ -4,7 +4,7 @@ import { trigger, state, style, animate, transition, stagger, query } from '@ang
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { v4 as uuidv4 } from 'uuid';
 import { MenuItem } from 'src/app/menu-item';
-
+import { ConnectedListService } from '../../connected-list.service'
 
 
 @Component({
@@ -88,33 +88,138 @@ export class MenuComponent implements OnInit {
   @Input()
   collapsed: any;
 
-  @Output() 
-  updateConnectedChildLists = new EventEmitter<Array<string>>();
+  @Input()
+  newItem: boolean;
 
-  onUpdateConnectedList(event: MouseEvent) {
+  @Input()
+  parentNode: boolean;
+
+  @Input()
+  parentColor: string;
+
+  // @Output() 
+  // updateConnectedChildLists = new EventEmitter<Array<string>>();
+
+  // onUpdateConnectedList(event ) {
+  //   if(this.id = 'owned'){
+  //     console.log(event);
+  //     // console.log();
+  //     this.connectedTo = event
+  //   }
+
+    // console.log(event);
+
     // event: MouseEvent
-      console.log(event)
-    let selNode: any;
-    if(event instanceof MouseEvent) {
-         event.preventDefault();
-         event.stopPropagation();
-         selNode = this.items
-    } else {
-        selNode = event
-    }
-    this.updateConnectedChildLists.emit(selNode);
-    console.log(this.items);
-    this.items.connectedTo = selNode
+//       console.log(event)
+//     let selNode: any;
+//     if(event instanceof MouseEvent) {
+//          event.preventDefault();
+//          event.stopPropagation();
+//          selNode = this.items
+//     } else {
+//         selNode = event
+//     }
+//     this.updateConnectedChildLists.emit(selNode);
+//     console.log(this.items);
+//     this.items.connectedTo = selNode
     // console.log(this.items.connectedTo)
-  }
+  // }
 
 
   hovering: boolean;
 
-  constructor() { }
+  constructor(private state: ConnectedListService) { }
 
   ngOnInit(): void {
-    // console.log(this.items);
+    // console.log(this.newItem);
+    // setTimeout(()=>{
+    //   if(this.newItem){
+    //     this.updateConnectedChildLists.emit(this.connectedTo);
+    //   }
+    // })
+    // if(parentNode)
+    if(this.sortable){
+      this.state.sharedList.subscribe(result => {
+        console.log(this.id);
+        console.log(this.sortable);
+        console.log(result);
+        this.connectedTo = result; // this set's the username to the default observable value
+      });
+    } 
+    
+  }
+
+  public rgbReduceA(c){
+    if(c){
+      return c
+    }
+  }
+
+  public RGBAToHexA(rgba) {
+    if(rgba){
+      let sep = rgba.indexOf(",") > -1 ? "," : " ";
+    rgba = rgba.substr(5).split(")")[0].split(sep);
+    console.log(rgba[3]);     
+    rgba[3] = 0.1;
+    return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`         
+    // Strip the slash if using space-separated syntax
+//     if (rgba.indexOf("/") > -1)
+//       rgba.splice(3,1);
+  
+//     for (let R in rgba) {
+//       // R = parseInt(R)
+//       let r = rgba[R];
+//       if (r.indexOf("%") > -1) {
+//         let p = r.substr(0,r.length - 1) / 100;
+  
+//         if (R < 3) {
+//           rgba[R] = Math.round(p * 255);
+//         } else {
+//           rgba[R] = p;
+//         }
+//       }
+//     }
+
+//     let r = (+rgba[0]).toString(16),
+//     g = (+rgba[1]).toString(16),
+//     b = (+rgba[2]).toString(16),
+//     a = Math.round(+rgba[3] * 255).toString(16);
+
+// if (r.length == 1)
+//   r = "0" + r;
+// if (g.length == 1)
+//   g = "0" + g;
+// if (b.length == 1)
+//   b = "0" + b;
+// if (a.length == 1)
+//   a = "0" + a;
+
+// return "#" + r + g + b + a;
+
+    }
+    
+  }
+
+  public hexToRGB(h) {
+    if(h){
+      let r = "0", g = "0", b = "0";
+  
+      // 3 digits
+      if (h.length == 4) {
+        r = "0x" + h[1] + h[1];
+        g = "0x" + h[2] + h[2];
+        b = "0x" + h[3] + h[3];
+    
+      // 6 digits
+      } else if (h.length == 7) {
+        r = "0x" + h[1] + h[2];
+        g = "0x" + h[3] + h[4];
+        b = "0x" + h[5] + h[6];
+      }
+      
+      return "rgb("+ +r + "," + +g + "," + +b + ", 0.1)";
+    }
+
   }
 
   select(item) {
@@ -136,7 +241,7 @@ export class MenuComponent implements OnInit {
 
   addSubfolder() {
     // console.log(this.items[0]);
-
+    const newId = uuidv4()
     // Get parent folder ID
     const parentId = [this.items[0].id];
 
@@ -148,11 +253,12 @@ export class MenuComponent implements OnInit {
       return res
     }, [])
 
-    this.updateConnectedChildLists.emit(otherFoldersOnThisLevel);
+    
 
     // Concat connected ids
-    const connectedFolders = parentId.concat(otherFoldersOnThisLevel)
-
+    const connectedFolders = parentId.concat(otherFoldersOnThisLevel, [newId])
+    
+    this.state.nextListState(connectedFolders);
 
 
     this.items[0].items.push({
@@ -163,9 +269,10 @@ export class MenuComponent implements OnInit {
       sortable: true,
       editable: true,
       editing: true,
-      id: uuidv4(),
+      id: newId,
       connectedTo: connectedFolders,
-      items: []
+      items: [],
+      newItem: true
     })
   }
 

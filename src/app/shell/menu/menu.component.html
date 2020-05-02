@@ -5,9 +5,9 @@
     [cdkDropListConnectedTo]="connectedTo"
     [cdkDropListDisabled]="!sortable"
     [ngClass]="{'emptyList': items?.length === 0, 'nonEmptyList': items?.length > 0}"
-    [@inOutAnimation]
+    
     *ngIf="!collapsed">
-
+    <!-- [@inOutAnimation] -->
     <div *ngIf="items?.length === 0" class="text-center pt-5" style="color:grey;">Drop items here</div>
 
     <div class="list-group list-group-root list-group-flush"
@@ -15,7 +15,8 @@
         cdkDropListGroup
         cdkDrag
         [cdkDragData]="item"
-        [cdkDragDisabled]="item.editing">
+        [cdkDragDisabled]="item.editing"
+        >
 
         <button class="list-group-item text-center" *cdkDragPlaceholder>
             <fa-icon [icon]="faChevronDown" style="color: black;"></fa-icon>
@@ -25,7 +26,9 @@
             (click)="!item.editing && select(item)"
             [class]="item.class"
             (mouseenter)="item.hovering = true;"
-            (mouseleave)="item.hovering = false;">
+            (mouseleave)="item.hovering = false;"
+            [ngStyle]="{'background-color': RGBAToHexA(parentColor)}"
+            [ngClass]="{'isOpen': !item.isCollapsed && item.items}">
 
             <div *ngIf="item.editing"
                 class="input-group input-group-sm">
@@ -101,8 +104,9 @@
             [items]="item.items"
             [collapsed]="item.isCollapsed"
             *ngIf="item.items || item.sortable"
-            (updateConnectedChildLists)="onUpdateConnectedList($event)"
-            >
+            [parentColor]="item.iconColor"
+            [newItem]="item.newItem"
+            [parentNode]="item.parentNode">
         </app-menu>
 
     </div>
